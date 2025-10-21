@@ -1,5 +1,5 @@
 #include "cpp-httplib/httplib.h"
-#include "instrument.h"
+#include "libinstrument.h"
 #include <nlohmann/json.hpp> // For JSON responses (optional)
 #include <iostream>
 #include <vector>
@@ -9,7 +9,8 @@ using json = nlohmann::json;
 std::mutex fpga_mutex;
 
 int main() {
-    if (fpga_init("/dev/xdma0_user") != 0) {
+
+    if (fpga_init() != 0) {
         std::cerr << "FPGA init failed\n";
         return 1;
     }
@@ -32,15 +33,15 @@ int main() {
         res.set_content(R"({"result": "started"})", "application/json");
     });
 
-    // GET /api/data
-    svr.Get("/api/data", [](const httplib::Request&, httplib::Response& res) {
-        std::lock_guard<std::mutex> lock(fpga_mutex);
-        const size_t length = 1024;
-        std::vector<float> buffer(length);
-        fpga_read_vector(buffer.data(), length);
-        json j = { {"data", buffer} };
-        res.set_content(j.dump(), "application/json");
-    });
+//    // GET /api/data
+//    svr.Get("/api/data", [](const httplib::Request&, httplib::Response& res) {
+//        std::lock_guard<std::mutex> lock(fpga_mutex);
+//        const size_t length = 1024;
+//        std::vector<float> buffer(length);
+//        fpga_read_vector(buffer.data(), length);
+//        json j = { {"data", buffer} };
+//        res.set_content(j.dump(), "application/json");
+//    });
 
     std::cout << "Server running on http://0.0.0.0:5000\n";
     svr.listen("0.0.0.0", 5000);

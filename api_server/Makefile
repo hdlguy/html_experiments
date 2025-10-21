@@ -1,5 +1,4 @@
-#all: libinstrument.so libinstrument.a test
-all: libinstrument.a libinstrument.so test_static test_dynamic 
+all: libinstrument.a libinstrument.so test_static test_dynamic
 .PHONY: clean run
 
 CFLAGS= -I./ -Wall 
@@ -24,9 +23,8 @@ test_static: test.cpp libinstrument.a
 test_dynamic: test.cpp libinstrument.so
 	g++ -L. -o test_dynamic test.cpp -linstrument
 
-#test_static: fpga_test.cpp libinstrument.a
-#	g++ -static -L. -o fpga_test fpga_test.cpp -linstrument
-
+#instrument_server: instrument_server.cpp libinstrument.so
+#	g++ -I../../ -I../../json/include -L. -o instrument_server instrument_server.cpp -linstrument
 
 clean:
 	rm -f *.o *.so *.a test_static test_dynamic
