@@ -9,6 +9,7 @@ static int fpga_initialized = 0;
 static uint32_t regarray[16];
 static uint32_t* regptr;
 
+// open the PCIe driver and get a pointer to the FPGA memory map
 int fpga_open()
 {
     regptr = regarray;
@@ -16,16 +17,22 @@ int fpga_open()
     return(0);
 }
 
+// Set the visible LEDs on the board
 int fpga_set_led(uint32_t val)
 {
     regptr[2] = val;
     return(0);
 }
 
+// Get the current value of the LEDs
 int fpga_get_led(uint32_t* val)
 {
     *val = regptr[2];
     return(0);
 }
 
+int fpga_close()
+{
+    return(0);
+}
 
