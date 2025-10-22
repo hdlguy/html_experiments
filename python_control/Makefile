@@ -1,11 +1,7 @@
 all: libinstrument.so 
 .PHONY: clean
 
-CFLAGS= -I./ -Wall 
-
-DEPS = Makefile
-
-libinstrument.so: instrument.c
+libinstrument.so: instrument.c fpga.h Makefile
 	gcc -shared -fPIC -o libinstrument.so instrument.c
 
 clean:

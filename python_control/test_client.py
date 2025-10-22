@@ -19,3 +19,8 @@ for mode in [0, 1, 2, 3]:
 
 
 
+data_out = [i for i in range(inst.BRAM_WORDS)]
+inst.fpga_write_bram(data_out)
+data_in = inst.fpga_read_bram()
+print("First 8 words:", data_in[:8])
+
