@@ -4,11 +4,13 @@
 #include <time.h>
 #include <stdint.h>
 
-static int initialized = 0;
-static int fake_status = 42;
+//static int initialized = 0;
+//static int fake_status = 42;
+
+static int fpga_initialized = 0;
 static uint32_t regarray[16];
 static uint32_t* regptr;
-
+/*
 int instrument_init(void) {
     srand(time(NULL));
     initialized = 1;
@@ -29,10 +31,12 @@ int instrument_read_status(int *status) {
     printf("[libinstrument] status read: %d\n", *status);
     return 0;
 }
+*/
 
 int fpga_open()
 {
     regptr = regarray;
+    fpga_initialized = 1;
     return(0);
 }
 
