@@ -5,6 +5,7 @@
 #include <time.h>
 #include <stdint.h>
 #include "fpga.h"
+#include "instrument.h"
 
 static int fpga_initialized = 0;
 static uint32_t regarray[NUM_REGS]; // stand-in for FPGA register file
@@ -22,8 +23,6 @@ int fpga_open()
     //
     regptr[FPGA_VERSION] = 0x00000101;
     regptr[FPGA_ID] = 0xdeadbeef;
-    printf("fpga_open: FPGA_ID = 0x%08x\n", regptr[FPGA_ID]);
-    printf("fpga_open: FPGA_VERSION = 0x%08x\n", regptr[FPGA_VERSION]);
     fpga_initialized = 1;
 
     return(0);

@@ -18,11 +18,11 @@ int main()
     status = fpga_open();
     if (status != 0) return(1);
 
-    //fpga_get_id(&rval);
-    printf("FPGA_ID = 0x%08x\n", rval);
+    fpga_get_id(&rval);
+    printf("main: FPGA_ID = 0x%08x\n", rval);
 
-    //fpga_get_version(&rval);
-    printf("FPGA_VERSION = 0x%08x\n", rval);
+    fpga_get_version(&rval);
+    printf("main: FPGA_VERSION = 0x%08x\n", rval);
 
     for (int i=0; i<4; i++) {
         fpga_get_led(&rval);
