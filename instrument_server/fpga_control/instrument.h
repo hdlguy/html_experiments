@@ -4,8 +4,13 @@
 
 int fpga_open();
 int fpga_close();
+
+int fpga_get_version(uint32_t* val);
+int fpga_get_id(uint32_t* val);
+
 int fpga_set_led(uint32_t val);
 int fpga_get_led(uint32_t* val);
+
 int fpga_read_bram(uint32_t* data);
 int fpga_write_bram(uint32_t* data);
 

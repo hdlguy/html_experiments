@@ -20,6 +20,10 @@ int fpga_open()
     bramptr = bramarray;
 
     //
+    regptr[FPGA_VERSION] = 0x00000101;
+    regptr[FPGA_ID] = 0xdeadbeef;
+    printf("fpga_open: FPGA_ID = 0x%08x\n", regptr[FPGA_ID]);
+    printf("fpga_open: FPGA_VERSION = 0x%08x\n", regptr[FPGA_VERSION]);
     fpga_initialized = 1;
 
     return(0);
@@ -31,17 +35,31 @@ int fpga_close()
     return(0);
 }
 
+// Get the current fpga ID register
+int fpga_get_id(uint32_t* val)
+{
+    *val = regptr[FPGA_ID];
+    return(0);
+}
+
+// Get the current fpga version register
+int fpga_get_version(uint32_t* val)
+{
+    *val = regptr[FPGA_VERSION];
+    return(0);
+}
+
 // Set the visible LEDs on the board
 int fpga_set_led(uint32_t val)
 {
-    regptr[2] = val;
+    regptr[FPGA_LED] = val;
     return(0);
 }
 
 // Get the current value of the LEDs
 int fpga_get_led(uint32_t* val)
 {
-    *val = regptr[2];
+    *val = regptr[FPGA_LED];
     return(0);
 }
 

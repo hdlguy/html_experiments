@@ -18,6 +18,12 @@ int main()
     status = fpga_open();
     if (status != 0) return(1);
 
+    //fpga_get_id(&rval);
+    printf("FPGA_ID = 0x%08x\n", rval);
+
+    //fpga_get_version(&rval);
+    printf("FPGA_VERSION = 0x%08x\n", rval);
+
     for (int i=0; i<4; i++) {
         fpga_get_led(&rval);
         printf("fpga_get_led -> 0x%08x\n", rval);
@@ -25,12 +31,12 @@ int main()
         fpga_set_led(wval);
     }
 
-    uint32_t write_data[BRAM_SIZE/4], read_data[BRAM_SIZE/4];
-    for (int i=0; i<BRAM_SIZE/4; i++) write_data[i] = rand();
+    uint32_t write_data[BRAM_SIZE], read_data[BRAM_SIZE];
+    for (int i=0; i<BRAM_SIZE; i++) write_data[i] = rand();
     fpga_write_bram(write_data);
     fpga_read_bram(read_data);
     int errors = 0;
-    for (int i=0; i<BRAM_SIZE/4; i++) if (write_data[i] != read_data[i]) errors++;
+    for (int i=0; i<BRAM_SIZE; i++) if (write_data[i] != read_data[i]) errors++;
     printf("bram test: errors = %d\n", errors);
 
     fpga_close();
