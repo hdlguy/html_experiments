@@ -3,8 +3,8 @@ import ctypes
 import os
 
 # some constants that must match fpga.h
-BRAM_SIZE = 4096
-BRAM_WORDS = BRAM_SIZE // 4
+BRAM_SIZE = 8
+BRAM_WORDS = BRAM_SIZE // 1
 
 # Load the shared library (use absolute path for safety)
 _libpath = os.path.join(os.path.dirname(__file__), "libinstrument.so")

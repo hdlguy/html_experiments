@@ -9,7 +9,7 @@
 static int fpga_initialized = 0;
 static uint32_t regarray[NUM_REGS]; // stand-in for FPGA register file
 static uint32_t* regptr;
-static uint32_t bramarray[BRAM_SIZE/4]; // stand-in for bram memory in the FPGA
+static uint32_t bramarray[BRAM_SIZE]; // stand-in for bram memory in the FPGA
 static uint32_t* bramptr;
 
 // open the PCIe driver and get a pointer to the FPGA memory map
@@ -48,14 +48,14 @@ int fpga_get_led(uint32_t* val)
 // get data from block ram
 int fpga_read_bram(uint32_t* data)
 {
-    for (int i=0; i<BRAM_SIZE/4; i++) data[i] = bramptr[i];
+    for (int i=0; i<BRAM_SIZE; i++) data[i] = bramptr[i];
     return(0);
 }
 
 // write data to block ram
 int fpga_write_bram(uint32_t* data)
 {
-    for (int i=0; i<BRAM_SIZE/4; i++) bramptr[i] = data[i];
+    for (int i=0; i<BRAM_SIZE; i++) bramptr[i] = data[i];
     return(0);
 }
 
