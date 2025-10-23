@@ -25,6 +25,13 @@ int main()
         fpga_set_led(wval);
     }
 
+    uint32_t write_data[BRAM_SIZE/4], read_data[BRAM_SIZE/4];
+    for (int i=0; i<BRAM_SIZE/4; i++) write_data[i] = rand();
+    fpga_write_bram(write_data);
+    fpga_read_bram(read_data);
+    int errors = 0;
+    for (int i=0; i<BRAM_SIZE/4; i++) if (write_data[i] != read_data[i]) errors++;
+    printf("bram test: errors = %d\n", errors);
 
     fpga_close();
 
