@@ -35,7 +35,8 @@ def read_bram(request):
     """Read the first few BRAM words."""
     try:
         data = inst.fpga_read_bram()
-        return JsonResponse({"bram_first_8": data[:8]})
+        #return JsonResponse({"bram_first_8": data[:8]})
+        return JsonResponse({"bram_data": data})
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
 
@@ -54,3 +55,23 @@ def write_bram(request):
         return JsonResponse({"status": "ok", "words_written": len(data)})
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+
+@require_http_methods(["GET"])
+def get_id(request):
+    """Read the current FPGA ID register value."""
+    try:
+        id = inst.fpga_get_id()
+        return JsonResponse({"id": id})
+    except Exception as e:
+        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+@require_http_methods(["GET"])
+def get_version(request):
+    """Read the current FPGA VERSION register value."""
+    try:
+        version = inst.fpga_get_version()
+        return JsonResponse({"version": version})
+    except Exception as e:
+        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+

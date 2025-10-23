@@ -26,6 +26,20 @@ def fpga_open():
         raise RuntimeError("fpga_open failed")
     return 0
 
+def fpga_get_id() -> int:
+    value = ctypes.c_int()
+    rc = _lib.fpga_get_id(ctypes.byref(value))
+    if rc != 0:
+        raise RuntimeError("fpga_get_id failed")
+    return value.value
+
+def fpga_get_version() -> int:
+    value = ctypes.c_int()
+    rc = _lib.fpga_get_version(ctypes.byref(value))
+    if rc != 0:
+        raise RuntimeError("fpga_get_version failed")
+    return value.value
+
 def fpga_set_led(val: int):
     rc = _lib.fpga_set_led(val)
     if rc != 0:

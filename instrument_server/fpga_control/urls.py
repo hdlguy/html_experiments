@@ -7,4 +7,6 @@ urlpatterns = [
     path("led/", views.get_led, name="get_led"),              # GET: read LEDs
     path("bram/read/", views.read_bram, name="read_bram"),
     path("bram/write/", views.write_bram, name="write_bram"),
+    path("id/", views.get_id, name="get_id"),
+    path("version/", views.get_version, name="get_version"),
 ]

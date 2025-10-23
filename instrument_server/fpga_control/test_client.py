@@ -1,9 +1,16 @@
+# This little module tests libinstrument_wrapper.py
 
 import libinstrument_wrapper as inst
 import time
 
 print("Initializing instrument...")
 inst.fpga_open()
+
+fpga_id = inst.fpga_get_id()
+print("fpga_id = " + hex(fpga_id & 0xffffffff))
+
+fpga_version = inst.fpga_get_version()
+print("fpga_version = " + hex(fpga_version & 0xffffffff))
 
 
 for mode in [0, 1, 2, 3]:
