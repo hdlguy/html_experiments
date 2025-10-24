@@ -4,7 +4,7 @@ This folder holds an attempt to access a C library from a web server running Dja
 ## files
 
 ### ./
-manage.py - this is the module used to control Django start, stop, migrate, etc.
+manage.py - this is the module used to control Django start, stop, migrate, etc. Start with "python3 manage.py runserver 0.0.0.0:8000".
 
 ### ./fpga_control/
 This folder holds the C library and the necessary python modules to expose it to Django.
