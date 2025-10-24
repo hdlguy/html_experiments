@@ -13,6 +13,9 @@ static uint32_t* regptr;
 static uint32_t bramarray[BRAM_SIZE]; // stand-in for bram memory in the FPGA
 static uint32_t* bramptr;
 
+const uint32_t fpga_version = 0xAA550101;
+const uint32_t fpga_id = 0xdeadbeef;
+
 // open the PCIe driver and get a pointer to the FPGA memory map
 int fpga_open()
 {
@@ -21,8 +24,8 @@ int fpga_open()
     bramptr = bramarray;
 
     //
-    regptr[FPGA_VERSION] = 0x00000101;
-    regptr[FPGA_ID] = 0xdeadbeef;
+    regptr[FPGA_VERSION] = fpga_version;
+    regptr[FPGA_ID] = fpga_id;
     fpga_initialized = 1;
 
     return(0);
