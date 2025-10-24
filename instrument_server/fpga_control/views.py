@@ -62,7 +62,7 @@ def get_id(request):
     """Read the current FPGA ID register value."""
     try:
         id = inst.fpga_get_id()
-        return JsonResponse({"id": id})
+        return JsonResponse({"id": hex(id & 0xffffffff)})
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
 
@@ -71,7 +71,7 @@ def get_version(request):
     """Read the current FPGA VERSION register value."""
     try:
         version = inst.fpga_get_version()
-        return JsonResponse({"version": version})
+        return JsonResponse({"version": hex(version & 0xffffffff)})
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
 
