@@ -18,6 +18,6 @@ views.py - tells Django how to translate HTML GET and POST requests to libinstru
 urls.py - tells Django what URLs go to which function call.
 
 ### ./instrument_server/
-This folder contains the files created when the Django project is created.
+This folder contains the standard files created when the Django project is created.
 
 
